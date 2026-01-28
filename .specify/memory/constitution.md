@@ -1,55 +1,100 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version change: Initial Version -> v1.0.0
+- List of modified principles:
+  - Specification-driven development
+  - Security-first architecture
+  - Clear separation of concerns
+  - Deterministic, reproducible development outputs
+  - Production-readiness over demo-only shortcuts
+- Added sections:
+  - Key standards
+  - Technology constraints
+  - Security standards
+  - Development constraints
+  - Functional requirements
+  - Quality requirements
+  - Success criteria
+- Removed sections: None
+- Templates requiring updates:
+  - .specify/templates/plan-template.md
+  - .specify/templates/spec-template.md
+  - .specify/templates/tasks-template.md
+- Follow-up TODOs: None
+-->
+# Full-Stack Multi-User Todo Web Application Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Specification-Driven Development
+No manual coding. All features must be traceable to written specifications. Development flow must follow: Spec -> Plan -> Tasks -> Implementation.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Security-First Architecture
+JWT-based authentication & authorization. All API endpoints require valid JWT authentication. Secrets must be sourced from environment variables.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Clear Separation of Concerns
+Frontend, backend, auth, and data systems must be distinct. Backend and frontend must operate as independent services.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Deterministic, Reproducible Development Outputs
+No manual code edits allowed (Claude Code only). Each phase must be reviewable and auditable.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Production-Readiness Over Demo-Only Shortcuts
+Stateless authentication (no backend session storage). Persistent storage using PostgreSQL.
 
-### [PRINCIPLE_6_NAME]
+## Key Standards
+- All features must be traceable to written specifications.
+- REST API must strictly follow defined endpoints and HTTP semantics.
+- Authentication must be enforced on every protected route.
+- User data isolation must be guaranteed at the API and database level.
+- All generated code must align strictly with the declared tech stack.
 
+## Technology Constraints
+- **Frontend**: Next.js 16+ (App Router)
+- **Backend**: Python FastAPI
+- **ORM**: SQLModel
+- **Database**: Neon Serverless PostgreSQL
+- **Authentication**: Better Auth (JWT-based)
+- No additional frameworks or authentication systems allowed.
 
-[PRINCIPLE__DESCRIPTION]
+## Security Standards
+- All API endpoints require valid JWT authentication.
+- JWT verification must occur server-side in FastAPI.
+- Secrets must be sourced from environment variables.
+- User ID from JWT must match route-level user context.
+- Unauthorized requests return HTTP 401.
+- Cross-user data access is strictly forbidden.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Constraints
+- No manual code edits allowed (Claude Code only).
+- Development flow must follow: Spec -> Plan -> Tasks -> Implementation.
+- Each phase must be reviewable and auditable.
+- Backend and frontend must operate as independent services.
+- Stateless authentication (no backend session storage).
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+## Functional Requirements
+- Implement all 5 Basic Level Todo features.
+- Persistent storage using PostgreSQL.
+- RESTful CRUD operations for tasks.
+- Task ownership enforced on every operation.
+- Responsive, multi-user frontend interface.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Quality Requirements
+- Code must be readable, modular, and maintainable.
+- API responses must use consistent schemas.
+- Proper error handling and HTTP status codes required.
+- Database migrations must be deterministic.
+- Environment-based configuration (no hardcoded secrets).
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Success Criteria
+- All specifications implemented without deviation.
+- All API endpoints secured and functional.
+- Users can access only their own tasks.
+- JWT-based authentication verified end-to-end.
+- Application runs successfully in a real deployment environment.
+- Clear evidence of a complete spec-driven development workflow.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution is the single source of truth for project principles and standards. All development activities, reviews, and artifacts must comply with its rules. Amendments require documented approval and a clear migration plan for existing components.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: v1.0.0 | **Ratified**: 2026-01-28 | **Last Amended**: 2026-01-28
