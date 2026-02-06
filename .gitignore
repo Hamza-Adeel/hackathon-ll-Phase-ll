@@ -16,3 +16,15 @@ Thumbs.db
 
 # Environment
 .env*
+
+# Node.js
+node_modules/
+dist/
+build/
+*.log
+.npm/
+.yarn/
+/frontend/my-app/.next/
+/frontend/my-app/out/
+/frontend/my-app/build/
+
