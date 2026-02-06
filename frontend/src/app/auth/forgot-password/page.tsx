@@ -14,13 +14,11 @@ const ForgotPasswordPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic validation
     if (!email) {
       toast.error('Please enter your email address.');
       return;
     }
 
-    // Basic email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error('Please enter a valid email address.');
@@ -32,12 +30,8 @@ const ForgotPasswordPage: React.FC = () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/forgot-password`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
@@ -61,12 +55,12 @@ const ForgotPasswordPage: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] transition-colors duration-300"
     >
-      <GlassCard variant="elevated" className="py-8 px-6 sm:px-10 max-w-md w-full">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground">Forgot your password?</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+      <GlassCard variant="elevated" className="py-8 px-6 sm:px-10 max-w-md w-full bg-[rgb(var(--color-bg-secondary))]/70 backdrop-blur-md border border-[rgb(var(--color-text-muted))]/20 shadow-lg">
+        <div className="mb-6 text-center">
+          <h2 className="text-2xl font-bold text-[rgb(var(--color-text-primary))]">Forgot your password?</h2>
+          <p className="mt-2 text-sm text-[rgb(var(--color-text-muted))]">
             No worries, we&apos;ll send you reset instructions.
           </p>
         </div>
@@ -98,8 +92,8 @@ const ForgotPasswordPage: React.FC = () => {
             </GradientButton>
           </div>
 
-          <div className="text-center text-sm text-muted-foreground">
-            <a href="/auth/login" className="font-medium text-primary hover:text-primary/80">
+          <div className="text-center text-sm mt-4 text-[rgb(var(--color-text-muted))]">
+            <a href="/auth/login" className="font-medium text-[rgb(var(--color-primary-start))] hover:text-[rgb(var(--color-primary-end))]/80 transition-colors">
               Back to sign in
             </a>
           </div>

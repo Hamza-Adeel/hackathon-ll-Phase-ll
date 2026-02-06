@@ -1,62 +1,98 @@
 :root {
-  /* Color tokens */
-  --color-primary-start: 123 31 162; /* Purple 500 in RGB */
-  --color-primary-end: 192 13 132;   /* Pink 600 in RGB */
-  --color-secondary-start: 59 130 246; /* Blue 500 in RGB */
-  --color-secondary-end: 37 99 235;   /* Blue 600 in RGB */
-  --color-accent-start: 236 72 153;   /* Pink 500 in RGB */
-  --color-accent-end: 219 39 119;     /* Pink 600 in RGB */
-  --color-neutral-dark: 17 24 39;     /* Gray 900 in RGB */
-  --color-neutral-darker: 3 7 18;     /* Very dark gray in RGB */
-  --color-neutral-light: 255 255 255; /* White in RGB */
-  --color-neutral-lighter: 249 250 251; /* Gray 50 in RGB */
+  /* =========================
+     BRAND COLOR TOKENS
+  ========================== */
 
-  /* Spacing tokens */
-  --spacing-xs: 0.25rem; /* 4px */
-  --spacing-sm: 0.5rem;  /* 8px */
-  --spacing-md: 1rem;    /* 16px */
-  --spacing-lg: 1.5rem;  /* 24px */
-  --spacing-xl: 2rem;    /* 32px */
-  --spacing-2xl: 3rem;   /* 48px */
-  --spacing-3xl: 4rem;   /* 64px */
+  /* Primary: Deep Indigo */
+  --color-primary-start: 79 70 229;   /* Indigo 600 */
+  --color-primary-end: 124 58 237;    /* Purple 600 */
 
-  /* Typography tokens */
-  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
+  /* Secondary: Electric Blue */
+  --color-secondary-start: 37 99 235;  /* Blue 600 */
+  --color-secondary-end: 29 78 216;    /* Blue 700 */
+
+  /* Accent: Controlled Magenta */
+  --color-accent-start: 217 70 239;   /* Fuchsia 500 */
+  --color-accent-end: 168 85 247;     /* Violet 500 */
+
+  /* Neutrals (Premium Dark Base) */
+  --color-neutral-dark: 15 23 42;      /* Slate 900 */
+  --color-neutral-darker: 8 8 20;      /* Deep navy black */
+  --color-neutral-light: 255 255 255;
+  --color-neutral-lighter: 241 245 249; /* Cool gray */
+
+
+  /* =========================
+     SPACING TOKENS
+  ========================== */
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* =========================
+     TYPOGRAPHY TOKENS
+  ========================== */
+
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* Radius tokens */
-  --radius-sm: 0.125rem;  /* 2px */
-  --radius-md: 0.25rem;   /* 4px */
-  --radius-lg: 0.5rem;    /* 8px */
-  --radius-xl: 0.75rem;   /* 12px */
-  --radius-2xl: 1rem;     /* 16px */
-  --radius-full: 9999px;  /* Full circle */
+  /* =========================
+     RADIUS TOKENS
+  ========================== */
 
-  /* Shadow tokens */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
 
-  /* Animation tokens */
+  /* =========================
+     SHADOW TOKENS
+  ========================== */
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.08);
+  --shadow-md: 0 6px 12px rgba(0,0,0,0.12);
+  --shadow-lg: 0 12px 24px rgba(0,0,0,0.16);
+  --shadow-xl: 0 20px 40px rgba(0,0,0,0.2);
+
+  --shadow-glow-primary: 0 0 40px rgba(139, 92, 246, 0.35);
+  --shadow-glow-secondary: 0 0 40px rgba(59, 130, 246, 0.35);
+
+  /* =========================
+     ANIMATION TOKENS
+  ========================== */
+
   --transition-fast: 150ms ease-out;
   --transition-normal: 300ms ease-out;
   --transition-slow: 500ms ease-out;
+
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* Z-index tokens */
+  /* =========================
+     Z-INDEX TOKENS
+  ========================== */
+
   --z-dropdown: 1000;
   --z-sticky: 1100;
   --z-fixed: 1200;
@@ -66,42 +102,68 @@
   --z-tooltip: 1600;
 }
 
-/* Dark theme overrides */
+/* =========================
+   DARK THEME
+========================== */
+
 [data-theme='dark'] {
-  --color-bg-primary: var(--color-neutral-darker); /* #030712 - Very dark */
-  --color-bg-secondary: var(--color-neutral-dark); /* #111827 - Dark */
-  --color-text-primary: var(--color-neutral-light); /* #ffffff - White */
-  --color-text-secondary: var(--color-neutral-lighter); /* #f9fafb - Near white */
-  --color-text-muted: 156 163 175; /* slate-400 - For less important text */
+  --color-bg-primary: 10 10 25;
+  --color-bg-secondary: 20 20 40;
+
+  --color-text-primary: 255 255 255;
+  --color-text-secondary: 226 232 240;
+  --color-text-muted: 148 163 184;
+
+  background-image: radial-gradient(
+    circle at 20% 20%,
+    rgba(139, 92, 246, 0.08),
+    transparent 40%
+  );
 }
 
-/* Light theme overrides */
+/* =========================
+   LIGHT THEME
+========================== */
+
 [data-theme='light'] {
-  --color-bg-primary: var(--color-neutral-light); /* #ffffff - White */
-  --color-bg-secondary: var(--color-neutral-lighter); /* #f9fafb - Near white */
-  --color-text-primary: var(--color-neutral-dark); /* #111827 - Dark */
-  --color-text-secondary: var(--color-neutral-darker); /* #030712 - Very dark */
-  --color-text-muted: 75 85 99; /* gray-600 - For less important text */
+  --color-bg-primary: 248 250 252;
+  --color-bg-secondary: 226 232 240;
+
+  --color-text-primary: 15 23 42;
+  --color-text-secondary: 30 41 59;
+  --color-text-muted: 100 116 139;
+
+  background-image: radial-gradient(
+    circle at top right,
+    rgba(99, 102, 241, 0.05),
+    transparent 40%
+  );
 }
 
-/* Contrast-enhanced theme for high contrast mode */
+/* =========================
+   HIGH CONTRAST MODE
+========================== */
+
 @media (prefers-contrast: high) {
   :root {
-    --color-text-primary: 0 0 0; /* Pure black */
-    --color-text-secondary: 30 30 30; /* Very dark gray */
-    --color-bg-primary: 255 255 255; /* Pure white */
-    --color-bg-secondary: 245 245 245; /* Light gray */
+    --color-text-primary: 0 0 0;
+    --color-text-secondary: 30 30 30;
+    --color-bg-primary: 255 255 255;
+    --color-bg-secondary: 245 245 245;
   }
 
   [data-theme='dark'] {
-    --color-text-primary: 255 255 255; /* Pure white */
-    --color-text-secondary: 220 220 220; /* Light gray */
-    --color-bg-primary: 0 0 0; /* Pure black */
-    --color-bg-secondary: 30 30 30; /* Very dark gray */
+    --color-text-primary: 255 255 255;
+    --color-text-secondary: 220 220 220;
+    --color-bg-primary: 0 0 0;
+    --color-bg-secondary: 30 30 30;
   }
 }
 
-/* Base styles */
+/* =========================
+   BASE STYLES
+========================== */
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -116,29 +178,42 @@ body {
   color: rgb(var(--color-text-primary));
   font-family: var(--font-family-primary);
   font-size: var(--font-size-base);
-  line-height: 1.5;
+  line-height: 1.6;
+  transition: background-color var(--transition-normal),
+              color var(--transition-normal);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: var(--transition-fast);
 }
 
-/* Focus styles for accessibility */
+a:hover {
+  color: rgb(var(--color-primary-start));
+}
+
+/* =========================
+   FOCUS STYLES
+========================== */
+
 :focus-visible {
   outline: 2px solid rgb(var(--color-primary-start));
-  outline-offset: 2px;
+  outline-offset: 3px;
   border-radius: calc(var(--radius-md) / 2);
+  box-shadow: var(--shadow-glow-primary);
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
   :focus-visible {
     outline-width: 3px;
   }
 }
 
-/* Reduced motion support for focus animations */
+/* =========================
+   REDUCED MOTION
+========================== */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -147,113 +222,10 @@ a {
   }
 }
 
-/* Responsive utility classes */
-.responsive-padding-sm {
-  padding: var(--spacing-xs);
-}
+/* =========================
+   CONTAINER
+========================== */
 
-.responsive-padding-md {
-  padding: var(--spacing-sm);
-}
-
-.responsive-padding-lg {
-  padding: var(--spacing-md);
-}
-
-@media (min-width: 640px) {
-  .responsive-padding-sm {
-    padding: var(--spacing-sm);
-  }
-  .responsive-padding-md {
-    padding: var(--spacing-md);
-  }
-  .responsive-padding-lg {
-    padding: var(--spacing-lg);
-  }
-}
-
-@media (min-width: 768px) {
-  .responsive-padding-sm {
-    padding: var(--spacing-md);
-  }
-  .responsive-padding-md {
-    padding: var(--spacing-lg);
-  }
-  .responsive-padding-lg {
-    padding: var(--spacing-xl);
-  }
-}
-
-@media (min-width: 1024px) {
-  .responsive-padding-sm {
-    padding: var(--spacing-lg);
-  }
-  .responsive-padding-md {
-    padding: var(--spacing-xl);
-  }
-  .responsive-padding-lg {
-    padding: var(--spacing-2xl);
-  }
-}
-
-/* Responsive typography */
-.text-responsive-xs {
-  font-size: var(--font-size-xs);
-}
-
-.text-responsive-sm {
-  font-size: var(--font-size-xs);
-}
-
-.text-responsive-base {
-  font-size: var(--font-size-sm);
-}
-
-.text-responsive-lg {
-  font-size: var(--font-size-base);
-}
-
-.text-responsive-xl {
-  font-size: var(--font-size-lg);
-}
-
-@media (min-width: 640px) {
-  .text-responsive-sm {
-    font-size: var(--font-size-sm);
-  }
-  .text-responsive-base {
-    font-size: var(--font-size-base);
-  }
-  .text-responsive-lg {
-    font-size: var(--font-size-lg);
-  }
-  .text-responsive-xl {
-    font-size: var(--font-size-xl);
-  }
-}
-
-@media (min-width: 768px) {
-  .text-responsive-base {
-    font-size: var(--font-size-lg);
-  }
-  .text-responsive-lg {
-    font-size: var(--font-size-xl);
-  }
-  .text-responsive-xl {
-    font-size: var(--font-size-2xl);
-  }
-}
-
-@media (min-width: 1024px) {
-  .text-responsive-lg {
-    font-size: var(--font-size-2xl);
-  }
-  .text-responsive-xl {
-    font-size: var(--font-size-3xl);
-  }
-}
-
-/* Responsive container */
 .container-responsive {
   width: 100%;
   max-width: 100%;
@@ -290,20 +262,38 @@ a {
   }
 }
 
-/* Gradient utility classes */
+/* =========================
+   GRADIENT UTILITIES
+========================== */
+
 .gradient-primary {
-  background: linear-gradient(to right, rgb(var(--color-primary-start)), rgb(var(--color-primary-end)));
+  background: linear-gradient(
+    to right,
+    rgb(var(--color-primary-start)),
+    rgb(var(--color-primary-end))
+  );
 }
 
 .gradient-secondary {
-  background: linear-gradient(to right, rgb(var(--color-secondary-start)), rgb(var(--color-secondary-end)));
+  background: linear-gradient(
+    to right,
+    rgb(var(--color-secondary-start)),
+    rgb(var(--color-secondary-end))
+  );
 }
 
 .gradient-accent {
-  background: linear-gradient(to right, rgb(var(--color-accent-start)), rgb(var(--color-accent-end)));
+  background: linear-gradient(
+    to right,
+    rgb(var(--color-accent-start)),
+    rgb(var(--color-accent-end))
+  );
 }
 
-/* Animation utility classes */
+/* =========================
+   ANIMATIONS
+========================== */
+
 .animate-fade-in {
   animation: fadeIn 0.3s var(--ease-standard);
 }
@@ -313,12 +303,8 @@ a {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideUp {

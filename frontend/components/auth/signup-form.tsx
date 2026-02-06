@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import React, { useState } from 'react';
 import { useAuth } from '../providers/auth-provider';
 import { useRouter } from 'next/navigation';
@@ -22,9 +20,7 @@ export const SignupForm: React.FC = () => {
   const { signup } = useAuth();
   const router = useRouter();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -42,7 +38,7 @@ export const SignupForm: React.FC = () => {
 
     try {
       await signup(formData.name, formData.email, formData.password);
-      router.push('/'); // Redirect to home page after successful signup
+      router.push('/'); // Redirect after successful signup
     } catch (err) {
       setError('Signup failed. Please try again.');
       console.error('Signup error:', err);
@@ -58,9 +54,7 @@ export const SignupForm: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       <GlassCard variant="elevated" className="py-8 px-6 sm:px-10">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-foreground">Create an account</h2>
-        </div>
+        <h2 className="text-2xl font-bold text-foreground mb-6">Create an account</h2>
 
         {error && (
           <motion.div
@@ -73,76 +67,67 @@ export const SignupForm: React.FC = () => {
         )}
 
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <GlassInput
-              label="Full Name"
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="John Doe"
-            />
-          </div>
+          <GlassInput
+            label="Full Name"
+            id="name"
+            name="name"
+            type="text"
+            required
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="John Doe"
+          />
 
-          <div>
-            <GlassInput
-              label="Email address"
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="john@example.com"
-            />
-          </div>
+          <GlassInput
+            label="Email address"
+            id="email"
+            name="email"
+            type="email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="john@example.com"
+          />
 
-          <div>
-            <GlassInput
-              label="Password"
-              id="password"
-              name="password"
-              type="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-            />
-          </div>
+          <GlassInput
+            label="Password"
+            id="password"
+            name="password"
+            type="password"
+            required
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="••••••••"
+          />
 
-          <div>
-            <GlassInput
-              label="Confirm Password"
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              required
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="••••••••"
-            />
-          </div>
+          <GlassInput
+            label="Confirm Password"
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            placeholder="••••••••"
+          />
 
-          <div>
-            <GradientButton
-              type="submit"
-              className="w-full"
-              disabled={loading}
-              variant="primary"
-            >
-              {loading ? 'Creating account...' : 'Sign up'}
-            </GradientButton>
-          </div>
+          <GradientButton
+            type="submit"
+            className="w-full"
+            disabled={loading}
+            variant="primary"
+            animate={true}
+          >
+            {loading ? 'Creating account...' : 'Sign up'}
+          </GradientButton>
         </form>
 
-        <div className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-muted-foreground">
           Already have an account?{' '}
           <a href="/auth/login" className="font-medium text-primary hover:text-primary/80">
             Sign in
           </a>
-        </div>
+        </p>
       </GlassCard>
     </motion.div>
   );

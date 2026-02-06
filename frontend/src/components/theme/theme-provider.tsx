@@ -3,22 +3,18 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Define theme context type
 interface ThemeContextType {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
   isMounted: boolean;
 }
 
-// Create theme context
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Theme Provider Component
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [isMounted, setIsMounted] = useState(false);
 
-  // Initialize theme from localStorage or system preference
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -32,7 +28,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setIsMounted(true);
   }, []);
 
-  // Apply theme to document
   useEffect(() => {
     if (isMounted) {
       document.documentElement.setAttribute('data-theme', theme);
@@ -46,28 +41,27 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  // Prevent SSR mismatch
   if (!isMounted) {
-    return (
-      <div className="hidden">
-        {children}
-      </div>
-    );
+    return <div className="hidden">{children}</div>;
   }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, isMounted }}>
       <div
         data-theme={theme}
-        className={`theme-${theme} ${theme}`}
+        className={`min-h-screen transition-colors duration-500
+        ${theme === 'dark'
+            ? 'bg-gradient-to-br from-[#0f0f1a] via-[#121225] to-[#0b0b14] text-gray-100'
+            : 'bg-gradient-to-br from-[#f8fafc] via-[#eef2ff] to-[#e0e7ff] text-gray-900'
+          }`}
       >
         <AnimatePresence mode="wait">
           <motion.div
             key={theme}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
           >
             {children}
           </motion.div>
@@ -77,7 +71,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Custom hook to use theme context
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -86,7 +79,6 @@ export const useTheme = () => {
   return context;
 };
 
-// Theme Toggle Button Component
 export const ThemeToggleButton = () => {
   const { theme, toggleTheme } = useTheme();
 
@@ -94,14 +86,26 @@ export const ThemeToggleButton = () => {
     <button
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-      className="relative p-3 rounded-xl bg-secondary text-secondary-foreground hover:bg-accent transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background shadow-lg"
+      className="relative p-3 rounded-2xl 
+      backdrop-blur-md
+      border border-white/10
+      bg-white/5
+      hover:bg-white/10
+      dark:bg-white/5
+      transition-all duration-300
+      shadow-[0_0_20px_rgba(139,92,246,0.25)]
+      hover:shadow-[0_0_30px_rgba(99,102,241,0.45)]
+      focus:outline-none
+      focus:ring-2
+      focus:ring-indigo-500
+      focus:ring-offset-2
+      focus:ring-offset-transparent"
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
       <div className="relative flex items-center justify-center">
         {theme === 'light' ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-gray-800"
+            className="h-5 w-5 text-indigo-600 transition-all duration-300"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -110,11 +114,11 @@ export const ThemeToggleButton = () => {
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 text-yellow-300"
+            className="h-5 w-5 text-yellow-400 transition-all duration-300"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
-            <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+            <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
           </svg>
         )}
       </div>

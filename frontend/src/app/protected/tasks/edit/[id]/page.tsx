@@ -6,6 +6,8 @@ import { useAuth } from '../../../../../components/providers/auth-provider';
 import { Task } from '../../../../../lib/types';
 import { apiClient } from '../../../../../lib/api/client';
 import { TaskForm } from '../../../../../components/tasks/task-form';
+import { GlassCard } from '@/src/components/ui/glass-card';
+import { GradientButton } from '@/src/components/ui/gradient-button';
 
 const EditTaskPage: React.FC = () => {
   const { id } = useParams();
@@ -24,7 +26,6 @@ const EditTaskPage: React.FC = () => {
         }
 
         const response = await apiClient.getTaskById(id as string);
-
         setTask(response);
       } catch (err) {
         setError('Failed to load task for editing');
@@ -34,13 +35,10 @@ const EditTaskPage: React.FC = () => {
       }
     };
 
-    if (id) {
-      fetchTask();
-    }
+    if (id) fetchTask();
   }, [id, token, router]);
 
   const handleTaskUpdated = (updatedTask: Task) => {
-    // Navigate back to the task details page after successful update
     router.push(`/protected/tasks/${id}`);
   };
 
@@ -51,38 +49,28 @@ const EditTaskPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[rgb(var(--color-primary-start))]"></div>
       </div>
     );
   }
 
-  if (error) {
+  if (error || !task) {
     return (
       <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <strong className="font-bold">Error! </strong>
-            <span className="block sm:inline">{error}</span>
-          </div>
+          <GlassCard
+            variant="elevated"
+            className={`p-4 ${
+              error ? 'bg-red-100/60 border-red-400/40 text-red-800' : 'bg-yellow-100/60 border-yellow-400/40 text-yellow-800'
+            }`}
+          >
+            <strong className="font-bold">{error || 'Task not found!'}</strong>
+          </GlassCard>
         </div>
       </div>
     );
   }
 
-  if (!task) {
-    return (
-      <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
-            <strong className="font-bold">Task not found! </strong>
-            <span className="block sm:inline">The requested task does not exist.</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Prepare initial form data from the task
   const initialFormData = {
     title: task.title,
     description: task.description || '',
@@ -92,21 +80,26 @@ const EditTaskPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-6 sm:px-6 lg:px-8">
-      <div className="px-4 py-6 sm:px-0">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Edit Task</h1>
-          <button
+      <div className="px-4 py-6 sm:px-0 space-y-6">
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-[rgb(var(--color-text-primary))]">Edit Task</h1>
+          <GradientButton
+            variant="tertiary"
+            animate={true}
             onClick={() => router.back()}
-            className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50"
           >
             Back
-          </button>
+          </GradientButton>
         </div>
 
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-          <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Update Task Details</h3>
-            <p className="mt-1 max-w-2xl text-sm text-gray-500">Modify the task information below.</p>
+        {/* Task Form Card */}
+        <GlassCard variant="elevated" className="overflow-hidden shadow-lg border border-[rgb(var(--color-text-muted))]/20">
+          <div className="px-4 py-5 border-b border-[rgb(var(--color-text-muted))]/20">
+            <h3 className="text-lg font-medium text-[rgb(var(--color-text-primary))]">Update Task Details</h3>
+            <p className="mt-1 max-w-2xl text-sm text-[rgb(var(--color-text-muted))]">
+              Modify the task information below.
+            </p>
           </div>
 
           <div className="p-6">
@@ -117,7 +110,7 @@ const EditTaskPage: React.FC = () => {
               initialData={initialFormData}
             />
           </div>
-        </div>
+        </GlassCard>
       </div>
     </div>
   );

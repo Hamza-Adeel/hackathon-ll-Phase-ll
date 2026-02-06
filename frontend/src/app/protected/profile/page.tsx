@@ -18,25 +18,19 @@ const ProfilePage: React.FC = () => {
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Basic validation
     if (!oldPassword || !newPassword || !confirmNewPassword) {
       toast.error('Please fill in all fields.');
       return;
     }
-
     if (newPassword !== confirmNewPassword) {
       toast.error('New passwords do not match.');
       return;
     }
-
     if (newPassword.length < 8) {
       toast.error('New password must be at least 8 characters long.');
       return;
     }
-
     setLoadingChange(true);
-
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/auth/change-password`, {
         method: 'PUT',
@@ -54,7 +48,6 @@ const ProfilePage: React.FC = () => {
 
       if (response.ok) {
         toast.success('Password changed successfully!');
-        // Reset form
         setOldPassword('');
         setNewPassword('');
         setConfirmNewPassword('');
@@ -73,7 +66,7 @@ const ProfilePage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[rgb(var(--color-primary-start))]"></div>
       </div>
     );
   }
@@ -84,38 +77,40 @@ const ProfilePage: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="px-4 py-6 sm:px-0"
+        className="px-4 py-6 sm:px-0 space-y-6"
       >
-        <h1 className="text-2xl font-bold text-foreground mb-6">Profile</h1>
+        <h1 className="text-2xl font-bold text-[rgb(var(--color-text-primary))] mb-6">Profile</h1>
 
-        <GlassCard variant="elevated" className="p-6 mb-6">
-          <h3 className="text-lg leading-6 font-medium text-foreground mb-4">Personal Information</h3>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground mb-6">Your personal details and account information.</p>
+        {/* Personal Info */}
+        <GlassCard variant="elevated" className="p-6 bg-[rgb(var(--color-bg-secondary))]/70 backdrop-blur-md border border-[rgb(var(--color-text-muted))]/20 shadow-lg transition-colors duration-300">
+          <h3 className="text-lg font-medium text-[rgb(var(--color-text-primary))] mb-4">Personal Information</h3>
+          <p className="mt-1 text-sm text-[rgb(var(--color-text-muted))] mb-6">Your personal details and account information.</p>
 
           <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start sm:space-y-0 sm:space-x-4">
-              <dt className="text-sm font-medium text-muted-foreground mb-1 sm:mb-0">Full name</dt>
-              <dd className="text-sm text-foreground sm:text-right">{user?.name || 'Not provided'}</dd>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start sm:space-x-4">
+              <dt className="text-sm font-medium text-[rgb(var(--color-text-muted))]">Full name</dt>
+              <dd className="text-sm text-[rgb(var(--color-text-primary))] sm:text-right">{user?.name || 'Not provided'}</dd>
             </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start sm:space-y-0 sm:space-x-4">
-              <dt className="text-sm font-medium text-muted-foreground mb-1 sm:mb-0">Email address</dt>
-              <dd className="text-sm text-foreground sm:text-right">{user?.email}</dd>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start sm:space-x-4">
+              <dt className="text-sm font-medium text-[rgb(var(--color-text-muted))]">Email address</dt>
+              <dd className="text-sm text-[rgb(var(--color-text-primary))] sm:text-right">{user?.email}</dd>
             </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start sm:space-y-0 sm:space-x-4">
-              <dt className="text-sm font-medium text-muted-foreground mb-1 sm:mb-0">Account created</dt>
-              <dd className="text-sm text-foreground sm:text-right">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start sm:space-x-4">
+              <dt className="text-sm font-medium text-[rgb(var(--color-text-muted))]">Account created</dt>
+              <dd className="text-sm text-[rgb(var(--color-text-primary))] sm:text-right">
                 {user?.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'Unknown'}
               </dd>
             </div>
           </div>
         </GlassCard>
 
-        <GlassCard variant="elevated" className="p-6">
-          <h3 className="text-lg leading-6 font-medium text-foreground mb-4">Security</h3>
-          <p className="mt-1 max-w-2xl text-sm text-muted-foreground mb-6">Change your password and manage security settings.</p>
+        {/* Security Info */}
+        <GlassCard variant="elevated" className="p-6 bg-[rgb(var(--color-bg-secondary))]/70 backdrop-blur-md border border-[rgb(var(--color-text-muted))]/20 shadow-lg transition-colors duration-300">
+          <h3 className="text-lg font-medium text-[rgb(var(--color-text-primary))] mb-4">Security</h3>
+          <p className="mt-1 text-sm text-[rgb(var(--color-text-muted))] mb-6">Change your password and manage security settings.</p>
 
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-            <dt className="text-sm font-medium text-muted-foreground mb-2 sm:mb-0">Password</dt>
+            <dt className="text-sm font-medium text-[rgb(var(--color-text-muted))] mb-2 sm:mb-0">Password</dt>
             <dd className="sm:text-right">
               <GradientButton
                 onClick={() => setShowChangePasswordModal(true)}
@@ -139,44 +134,38 @@ const ProfilePage: React.FC = () => {
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="mx-auto p-6 rounded-xl glass max-w-md w-full"
+            className="mx-auto max-w-md w-full"
           >
-            <GlassCard variant="elevated" className="p-6">
-              <h3 className="text-lg font-medium text-foreground mb-4">Change Password</h3>
-              <form onSubmit={handleChangePassword}>
-                <div className="mb-4">
-                  <GlassInput
-                    label="Current Password"
-                    id="oldPassword"
-                    type="password"
-                    value={oldPassword}
-                    onChange={(e) => setOldPassword(e.target.value)}
-                    placeholder="Current password"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <GlassInput
-                    label="New Password"
-                    id="newPassword"
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="New password"
-                    required
-                  />
-                </div>
-                <div className="mb-6">
-                  <GlassInput
-                    label="Confirm New Password"
-                    id="confirmNewPassword"
-                    type="password"
-                    value={confirmNewPassword}
-                    onChange={(e) => setConfirmNewPassword(e.target.value)}
-                    placeholder="Confirm new password"
-                    required
-                  />
-                </div>
+            <GlassCard variant="elevated" className="p-6 bg-[rgb(var(--color-bg-secondary))]/70 backdrop-blur-md border border-[rgb(var(--color-text-muted))]/20 shadow-lg transition-colors duration-300 rounded-xl">
+              <h3 className="text-lg font-medium text-[rgb(var(--color-text-primary))] mb-4">Change Password</h3>
+              <form onSubmit={handleChangePassword} className="space-y-4">
+                <GlassInput
+                  label="Current Password"
+                  id="oldPassword"
+                  type="password"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  placeholder="Current password"
+                  required
+                />
+                <GlassInput
+                  label="New Password"
+                  id="newPassword"
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="New password"
+                  required
+                />
+                <GlassInput
+                  label="Confirm New Password"
+                  id="confirmNewPassword"
+                  type="password"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  placeholder="Confirm new password"
+                  required
+                />
                 <div className="flex justify-end space-x-3">
                   <GradientButton
                     type="button"

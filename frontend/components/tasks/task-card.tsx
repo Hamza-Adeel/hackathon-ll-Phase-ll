@@ -156,15 +156,18 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onUpdate }) => {
             </div>
 
             <div className="mt-5 flex justify-between items-center">
-              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-                task.priority === 'high'
-                  ? 'bg-linear-to-r from-red-500/20 to-red-600/20 text-red-300 border border-red-500/30'
-                  : task.priority === 'medium'
-                  ? 'bg-linear-to-r from-yellow-500/20 to-yellow-600/20 text-yellow-300 border border-yellow-500/30'
-                  : 'bg-linear-to-r from-green-500/20 to-green-600/20 text-green-300 border border-green-500/30'
-              }`}>
-                {task.priority || 'medium'}
-              </span>
+                <span
+                  className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                    task.priority === 'high'
+                      ? 'bg-gradient-to-r from-red-500/20 to-red-600/20 text-red-300 border border-red-500/30'
+                      : task.priority === 'medium'
+                      ? 'bg-gradient-to-r from-yellow-500/20 to-yellow-600/20 text-yellow-300 border border-yellow-500/30'
+                      : 'bg-gradient-to-r from-green-500/20 to-green-600/20 text-green-300 border border-green-500/30'
+                  }`}
+                >
+                  {task.priority ? task.priority.charAt(0).toUpperCase() + task.priority.slice(1) : 'Medium'}
+                </span>
+
 
               <div className="flex space-x-2">
                 <GradientButton
